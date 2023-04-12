@@ -5,6 +5,8 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public bool IsCreated = false;
+
+    public BuildingType Type;
     public int Height = 1, Width = 1;
     public int Depth;
     public SpriteRenderer Renderer;
@@ -13,10 +15,10 @@ public class Building : MonoBehaviour
 
     private int level;
     public ResourceItem[] IncomeItems;
+    
 
     public virtual void Start()
     {
-        
         try
         {
             Renderer = GetComponentInChildren<SpriteRenderer>();
@@ -36,7 +38,6 @@ public class Building : MonoBehaviour
     {
         CurrentTile = tile;
         IsCreated = true;
-        EventBus.Instance.OnTime.AddListener(GetIncome);
     }
 
     public void SetDepth(int value)
@@ -56,15 +57,7 @@ public class Building : MonoBehaviour
 
     virtual public void GetIncome()
     {
-        foreach (ResourceItem resource in IncomeItems)
-        {
-            ResourceItem currentItem = ResourceStorage.Instance.GetResourceItem(resource.Resource.Type);
-            
-            if (currentItem != null)
-            {
-                currentItem.AddValue(resource.Value);
-            }
-        }
+
     }
 
     virtual public void UpgradeBuilding()

@@ -5,15 +5,15 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    public bool isActive = true;
     public static InputManager instance;
-    private const float RAY_DISTANCE = 10;
-    private Camera _camera;
 
+    public bool isActive = true;
+    
+    private Camera _camera;
     private Vector3 _mousePosition;
     private Vector3 _camOffset;
 
-    [SerializeField][Range(0.0001f, 0.1f)] float _sensivity = 0.0001f;
+    [SerializeField][Range(0.0001f, 0.1f)] private float _sensivity = 0.0001f;
 
     private void Awake()
     {
@@ -30,17 +30,10 @@ public class InputManager : MonoBehaviour
     {
         if (!isActive) { return; }
 
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
-        {
-            CheckInput(Input.mousePosition);
-        }
-#endif
-
 #if UNITY_ANDROID
-        if (Input.touchCount == 1)
+        if (Input.touchCount > 0)
         {
-            CheckInput(Input.touches[0].position);
+            CheckInput(Input.GetTouch(0));
         }
 #endif
 
@@ -49,34 +42,38 @@ public class InputManager : MonoBehaviour
 
     private void MoveCamera()
     {
-        if (Input.GetMouseButtonDown(1))
+        Vector3 currentPos = _camera.transform.position;
+
+        if (Input.touchCount > 0)
         {
-            _mousePosition = Input.mousePosition;
-        }
+            if (Input.touches[0].phase == TouchPhase.Began)
+            {
+                _mousePosition = Input.mousePosition;
+            }
 
-        if (Input.GetMouseButton(1))
-        {
-            Vector3 newPos = Input.mousePosition;
+            if (Input.touches[0].phase == TouchPhase.Moved)
+            {
+                Vector3 newPos = Input.touches[0].position;
 
-            _camOffset = newPos - _mousePosition;
+                _camOffset = _mousePosition - newPos;
 
-            Vector3 currentPos = _camera.transform.position;
+                currentPos.x += _camOffset.x * _sensivity;
+                currentPos.y += _camOffset.y * _sensivity;
 
-            currentPos.x += _camOffset.x * _sensivity;
-            currentPos.y += _camOffset.y * _sensivity;
+                _mousePosition = Input.touches[0].position;
 
-            _camera.transform.position = currentPos;
-            _mousePosition = Input.mousePosition;
+                _camera.transform.position = currentPos;
+            }
         }
     }
 
-    private void CheckInput(Vector3 inputPosition)
+    private void CheckInput(Touch touch)
     {
-        RaycastHit2D hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(touch.position), Vector2.zero);
 
         if (hit != false)
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
                 if (hit.transform.gameObject.GetComponent<Tile>())
                 {

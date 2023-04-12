@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Filed : Building
@@ -16,8 +14,8 @@ public class Filed : Building
     }
     public override void OnClick()
     {
-        Debug.Log(_currentStage);
-        if (IsCreated)
+        if (!IsCreated) { return; }
+
         {
             if (_crop.Type == ResourceType.None) _fieldController.SetFileld(this);
             else if(_currentStage == _maxStage)
@@ -36,6 +34,7 @@ public class Filed : Building
     {
         base.Create(tile);
 
+        EventBus.Instance.OnGrow.AddListener(GetIncome);
         CurrentTile.SetField(true);
         CurrentTile.SetOccupied(true);
     }

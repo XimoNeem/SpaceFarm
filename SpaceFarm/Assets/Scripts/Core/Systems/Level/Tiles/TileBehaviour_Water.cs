@@ -13,12 +13,12 @@ public class TileBehaviour_Water : TileBehaviour
 
     public override void Click()
     {
-        Debug.Log("CLICK WATER");
+
     }
 
     public override bool TryBuild(Building building)
     {
-        Debug.Log("CANT build on water");
+        Debug.Log("WATER");
         return false;
     }
 }

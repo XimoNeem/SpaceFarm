@@ -16,6 +16,9 @@ public class Traiding_WindowController : WindowController
 
     [SerializeField] private Slider _sellSlider;
 
+    [SerializeField] private ResourceType _fromType, _toType;
+    private int _value = 0;
+
     private void OnEnable()
     {
         _sellSlider.onValueChanged.AddListener(GetSliderInput);
@@ -36,7 +39,7 @@ public class Traiding_WindowController : WindowController
 
     private IEnumerator CreateItemsList()
     {
-        foreach (var item in ResourceStorage.Instance.crops)
+        foreach (var item in ResourceStorage.Instance.Storage.crops)
         {
             CreateTraidingItem(item);
             yield return new WaitForEndOfFrame();
@@ -58,7 +61,7 @@ public class Traiding_WindowController : WindowController
         helper._previeImage.sprite = resource.Resource.Icon;
         helper._currentResource = resource.Resource;
         helper._button.onClick.AddListener( delegate { SoundManager.Instance.PlaySound(SFXType.Click); } );
-        helper._button.onClick.AddListener( delegate { ShowSellWindow(resource, ResourceStorage.Instance.GetResourceItem(ResourceType.Money)); } );
+        helper._button.onClick.AddListener( delegate { ShowSellWindow(resource, ResourceStorage.Instance.GetResourceItem(ResourceType.Gold)); } );
     }
 
     private void ShowSellWindow(ResourceItem fromItem, ResourceItem toItem)
@@ -73,19 +76,29 @@ public class Traiding_WindowController : WindowController
 
         _sellSlider.maxValue = fromItem.Value;
         _sellSlider.value = 0;
+
+        _fromType = fromItem.Resource.Type;
+        _toType = toItem.Resource.Type;
+        _value = 0;
     }
 
     private void GetSliderInput(float value)
     {
-        int val = (int)value;
+        _value = (int)value;
 
         _sellFromText.text = value.ToString();
-
-        _sellToText.text = value.ToString();
+        _sellToText.text = (ResourceStorage.Instance.ExchangeRate.GetRate(_fromType, _toType) * _value).ToString();
     }
 
-    private void Trade()
+    public void Trade()
     {
-        
+        if (ResourceStorage.Instance.Trade(_fromType, _toType, _value))
+        {
+            _sellWindow.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Error");
+        }
     }
 }

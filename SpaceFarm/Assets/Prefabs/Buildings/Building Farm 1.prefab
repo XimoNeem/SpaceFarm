@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 449770583500876710}
-  - component: {fileID: 4115568733375543342}
+  - component: {fileID: 4901170114281190293}
   - component: {fileID: 1839942669897812103}
   m_Layer: 0
   m_Name: Building Farm 1
@@ -118,7 +118,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4115568733375543342
+--- !u!114 &4901170114281190293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 449770583500876711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14010f41125d6541a93b0a661d69bbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a2645333b8d83f5498617a9424fa99f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsCreated: 0
@@ -137,10 +137,8 @@ MonoBehaviour:
   Renderer: {fileID: 0}
   CurrentTile: {fileID: 0}
   IncomeItems:
-  - Value: 10
-    Resource: {fileID: 11400000, guid: 8be1931d643bb99418b5ba12c0c9d370, type: 2}
-  - Value: 10
-    Resource: {fileID: 11400000, guid: 93bd5b6f38de99541a1ba7b042b7f0cd, type: 2}
+  - Value: 100
+    Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
 --- !u!60 &1839942669897812103
 PolygonCollider2D:
   m_ObjectHideFlags: 0

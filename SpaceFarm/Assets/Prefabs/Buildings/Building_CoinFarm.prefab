@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449770582876508628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.265, y: 0.726, z: 0}
-  m_LocalScale: {x: 0.5432812, y: 0.5875, z: 1}
+  m_LocalPosition: {x: 0, y: 0.442, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 449770583500876710}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac3be0477ff234d4dbe2523e56f4e255, type: 3}
+  m_SortingOrder: 7
+  m_Sprite: {fileID: -1939852166, guid: 7902efb28204f944a8b563db1664034a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,10 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 449770583500876710}
-  - component: {fileID: 4115568733375543342}
+  - component: {fileID: 6816950062956058130}
   - component: {fileID: 1839942669897812103}
   m_Layer: 0
-  m_Name: Building Farm
+  m_Name: Building_CoinFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4115568733375543342
+--- !u!114 &6816950062956058130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,12 +130,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14010f41125d6541a93b0a661d69bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsCreated: 0
+  Type: 3
   Height: 1
   Width: 1
   Depth: 0
+  Renderer: {fileID: 0}
+  CurrentTile: {fileID: 0}
   IncomeItems:
   - Value: 1
-    Resource: {fileID: 11400000, guid: 6e4e7ed83af4dd7489ce4913f9fbf910, type: 2}
+    Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
+  _progress: 0
+  _maxProgress: 20
+  _sprites:
+  - {fileID: -1939852166, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 2126455923, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1887536477, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1902000328, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1721416895, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -2038165892, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1226673179, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 485784493, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1918801534, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -2116973811, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1333861541, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1521698200, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1882115814, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -305748652, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1217320230, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1816492749, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 1093251849, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 657118015, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: 161004654, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+  - {fileID: -1689400327, guid: 7902efb28204f944a8b563db1664034a, type: 3}
 --- !u!60 &1839942669897812103
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -161,10 +188,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.6149125, y: 0.32814828}
-      - {x: 0.17390576, y: 0.96273446}
-      - {x: -1.1105937, y: 0.14496952}
-      - {x: -1.1001185, y: -0.42387167}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: -0.38111818, y: -0.8711262}
-      - {x: 0.60324496, y: -0.24996573}
+    - - {x: 0.64879215, y: 0.091870785}
+      - {x: -0.26946977, y: 0.63446087}
+      - {x: -1.159724, y: 0.11495274}
+      - {x: -1.1721048, y: -0.33559754}
+      - {x: -0.25345355, y: -0.86510015}
+      - {x: 0.6557985, y: -0.34318227}

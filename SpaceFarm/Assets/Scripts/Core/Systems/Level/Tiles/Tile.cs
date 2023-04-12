@@ -77,11 +77,11 @@ public class Tile : MonoBehaviour
 
         while (this.transform.localScale != newSize)
         {
-            this.transform.localScale = Vector3.Lerp(this.transform.localScale, newSize, 0.01f);
-            yield return null;
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale, newSize, Time.deltaTime * 5);
+            yield return new WaitForEndOfFrame();
         }
 
-        StopAllCoroutines();
+        yield break;
     }
 
     public void OnClick()
@@ -129,6 +129,7 @@ public class Tile : MonoBehaviour
             Vector2 dirUpLeft = new Vector2(-0.5f, 0.5f);
             Vector2 dirUpRight = new Vector2(0.5f, 0.5f);
 
+            Debug.DrawLine(origin, dirDownLeft * RAY_DISTANCE, Color.red, 5);
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirDownLeft, RAY_DISTANCE));
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirDownRight, RAY_DISTANCE));
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirUpLeft, RAY_DISTANCE));

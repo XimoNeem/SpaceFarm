@@ -43,7 +43,7 @@ public class LevelGenerator : MonoBehaviour
                     pos += new Vector3(0, 0.15f * b, 0);
                 }
 
-                CreateTile(SelectTile(noise).gameObject, pos, l + h);
+                CreateTile(SelectTile(noise).gameObject, pos, (l + h) * 2);
             }
         }
     }

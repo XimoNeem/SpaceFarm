@@ -5,8 +5,8 @@ public enum ResourceType
     Whead = 1,
     Berries = 2,
     Onions = 3,
-    Money = 100,
+    Gold = 100,
     Gems = 101,
-    Wood = 102,
-    Stone = 103
+    Oil = 102,
+    Water = 103
 }

@@ -56,7 +56,7 @@ public class BuildMenager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<Constructing_WindowControler>().SetApplyButtonActive(true);
+            FindObjectOfType<Constructing_WindowControler>().SetApplyButtonActive(false);
             _buildingToCreate.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
     }
@@ -67,30 +67,29 @@ public class BuildMenager : MonoBehaviour
         _buildingToCreate.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         BuildMode = false;
         _targetTile.SetOccupied(true);
-        //ShowGrid(false);
+        ShowGrid(false);
     }
 
     public void CancelBuilding()
     {
-        Destroy(_buildingToCreate);
+        Destroy(_buildingToCreate.gameObject);
         BuildMode = false;
         ShowGrid(false);
     }
 
     private void ShowGrid(bool state)
     {
-        /*foreach (var item in FindObjectsOfType<Tile>())
+        foreach (var item in FindObjectsOfType<Tile>())
         {
             if (state)
             {
-                item.ChangeSize(0.9f);
+                item.ChangeSize(0.95f);
             }
             else
             {
                 item.ChangeSize(1);
             }
-
-        }*/
+        }
     }
 }
 
