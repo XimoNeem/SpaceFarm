@@ -11,7 +11,8 @@ public class Tile : MonoBehaviour
     [SerializeField] public Vector2 SpawnHeight;
     [SerializeField] [Range(0f, 1f)] public float SpawnWeight = 0.5f;
 
-    public TileBehaviour TileBehaviour;
+    public TileBehaviour Behaviour;
+    public Building TileBuilding;
 
     public int depth;
     public Sprite FS;
@@ -29,13 +30,13 @@ public class Tile : MonoBehaviour
 
         Create();
 
-        SetBehaviour(TileBehaviour);
+        SetBehaviour(Behaviour.GetBehaviour());
     }
 
     public void SetBehaviour(TileBehaviour behaviour)
     {
-        TileBehaviour = behaviour;
-        TileBehaviour.ParentTile = this;
+        Behaviour = behaviour;
+        Behaviour.ParentTile = this;
     }
 
     public void SetField(bool state)
@@ -43,6 +44,11 @@ public class Tile : MonoBehaviour
         _isField = state;
 
         this.GetComponentInChildren<SpriteRenderer>().sprite = FS;
+    }
+
+    public void SetBuilding(Building building)
+    {
+        TileBuilding = building;
     }
 
     public void SetOccupied(bool state)
@@ -86,7 +92,7 @@ public class Tile : MonoBehaviour
 
     public void OnClick()
     {
-        TileBehaviour.Click();
+        Behaviour.Click();
     }
 
     public List<Tile> GetNearesrTiles(TileDirection dir)
@@ -129,7 +135,7 @@ public class Tile : MonoBehaviour
             Vector2 dirUpLeft = new Vector2(-0.5f, 0.5f);
             Vector2 dirUpRight = new Vector2(0.5f, 0.5f);
 
-            Debug.DrawLine(origin, dirDownLeft * RAY_DISTANCE, Color.red, 5);
+            Debug.DrawLine(origin, dirDownLeft * RAY_DISTANCE, Color.red, 20);
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirDownLeft, RAY_DISTANCE));
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirDownRight, RAY_DISTANCE));
             raycastHits.AddRange(Physics2D.RaycastAll(origin, dirUpLeft, RAY_DISTANCE));

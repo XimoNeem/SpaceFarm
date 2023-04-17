@@ -115,7 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 32
+    maxTextureSize: 64
     resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: main_ui_0
+      name: button_1
       rect:
         serializedVersion: 2
         x: 0
@@ -431,7 +431,7 @@ TextureImporter:
         width: 4
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 3, z: 2, w: 2}
       outline: []
       physicsShape: []
@@ -439,6 +439,27 @@ TextureImporter:
       bones: []
       spriteID: 0eaf8e27519dd0d43b244cc3bca7cd3c
       internalID: 907661585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: build_button
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 16
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86e1127229f5994a9270f44388cfbfa
+      internalID: -967728716
       vertices: []
       indices: 
       edges: []
@@ -461,11 +482,12 @@ TextureImporter:
       main_ui_11: 794286597
       main_ui_14: 907661585
       main_ui_12: 955098783
-      main_ui_0: -215986629
       main_ui_2: -1334612617
+      button_1: -215986629
       main_ui_4: -296542456
       main_ui_13: -588517029
       main_ui_6: -171442618
+      build_button: -967728716
       main_ui_1: 456801112
       main_ui_10: -1961503931
       main_ui_3: 153473058

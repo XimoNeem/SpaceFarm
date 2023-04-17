@@ -6,6 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class TileBehaviour_Regular : TileBehaviour
 {
+    public override TileBehaviour GetBehaviour()
+    {
+        return new TileBehaviour_Regular();
+    }
+
     public override void Build(Building building)
     {
         throw new System.NotImplementedException();
@@ -18,15 +23,13 @@ public class TileBehaviour_Regular : TileBehaviour
 
     public override bool TryBuild(Building building)
     {
-        Debug.Log("REGULAR");
-
         if (building.Type == BuildingType.WaterGenerator)
         {
             Debug.Log(building.Type);
             foreach (var item in ParentTile.GetNearesrTiles(TileDirection.All))
             {
                 Debug.Log(item);
-                if (item.TileBehaviour is TileBehaviour_Water)
+                if (item.Behaviour is TileBehaviour_Water)
                 {
                     return true;
                 }

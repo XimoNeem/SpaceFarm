@@ -57,10 +57,11 @@ namespace Game.Networking
             }
         }
 
-        public static IEnumerator GetUser(int ID, Action<UserData> callback)
+        public static IEnumerator GetUser(string email, string password, Action<UserData> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
-            form.AddField("GET_USER", ID.ToString());
+            form.AddField("GET_USER_EMAIL", email);
+            form.AddField("GET_USER_PASSWORD", password);
 
             using (UnityWebRequest request = UnityWebRequest.Post("http://nevile.pluton-host.ru/gamedata/get_user.php", form))
             {
@@ -69,12 +70,30 @@ namespace Game.Networking
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogError(request.error);
+                    errorCallback.Invoke(request.error);
                     yield break;
                 }
                 else
                 {
-                    string jsonText = request.downloadHandler.text;
-                    Debug.Log(jsonText);
+                    Debug.LogError(request.downloadHandler.text);
+                    if (request.downloadHandler.text.StartsWith("[ERROR]"))
+                    {
+                        errorCallback.Invoke(request.downloadHandler.text.Replace("[ERROR]", ""));
+                    }
+                    var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
+
+
+                    StorageInfo resources = JsonUtility.FromJson<StorageInfo>(values["user_resources"]);
+
+                    UserData data = new UserData(
+                            int.Parse(values["user_id"]),
+                            values["user_name"],
+                            values["user_email"],
+                            values["user_password"]
+                        );
+                    data.Resources = resources;
+
+                    successCallback.Invoke(data);
                 }
             }
         }
@@ -105,7 +124,7 @@ namespace Game.Networking
             }
         }
 
-        public static IEnumerator LoadUser(int id, Action<UserData> successCallback, Action<string> errorCallback)
+        public static IEnumerator LoadUserData(int id, Action<UserData> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
             form.AddField("ID", id);

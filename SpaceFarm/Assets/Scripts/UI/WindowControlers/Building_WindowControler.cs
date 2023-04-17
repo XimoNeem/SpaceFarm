@@ -18,7 +18,7 @@ public class Building_WindowControler : WindowController
 
     private void CreateItemsList()
     {
-        foreach (var item in BuildMenager.Instance.Buildings)
+        foreach (var item in BuildMenager.Instance.BuildingsInfo)
         {
             CreateBuildingItem(item);
         }
@@ -36,7 +36,7 @@ public class Building_WindowControler : WindowController
     void Start()
     {
         CreateItemsList();
-        SetCurrentBuilding(BuildMenager.Instance.Buildings[0]);
+        SetCurrentBuilding(BuildMenager.Instance.BuildingsInfo[0]);
     }
 
     public void SetCurrentBuilding(BuildingInfo buildingInfo)

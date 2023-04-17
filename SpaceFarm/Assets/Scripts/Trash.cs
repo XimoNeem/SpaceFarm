@@ -6,9 +6,10 @@ using Game.Networking;
 
 public class Trash : MonoBehaviour
 {
-    private void Start()
+    public void SaveBuildings()
     {
-        print(true & false);
+        string str = JsonUtility.ToJson(BuildMenager.Instance.Buildings);
+        Debug.Log(str);
     }
     public void Save()
     {
@@ -30,7 +31,7 @@ public class Trash : MonoBehaviour
 
     public void Load()
     {
-        StartCoroutine(DataBaseHandler.LoadUser(
+        StartCoroutine(DataBaseHandler.LoadUserData(
                 1,
                 SetUser,
                 PrintError

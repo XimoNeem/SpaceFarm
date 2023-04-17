@@ -58,6 +58,7 @@ public class Traiding_WindowController : WindowController
     {
         Traiding_ViewItem helper = Instantiate(_itemPrefab, _scrollViewContent);
         helper._nameText.text = resource.Resource.Name;
+        helper._valueText.text = resource.Value.ToString();
         helper._previeImage.sprite = resource.Resource.Icon;
         helper._currentResource = resource.Resource;
         helper._button.onClick.AddListener( delegate { SoundManager.Instance.PlaySound(SFXType.Click); } );

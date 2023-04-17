@@ -18,7 +18,6 @@ public class Farm : Building
     public override void GetIncome() // Каждые 10 секунд
     {
         _progress += 1;
-        Debug.Log(_progress);
 
         if (_progress < _maxProgress)
         {

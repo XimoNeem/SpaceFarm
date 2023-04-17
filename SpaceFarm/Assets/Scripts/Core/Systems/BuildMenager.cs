@@ -7,8 +7,10 @@ public class BuildMenager : MonoBehaviour
     [SerializeField] private Building _currentBuilding;
 
     public static BuildMenager Instance;
+    public BuildingsData Buildings;
 
-    public BuildingInfo[] Buildings;
+
+    public BuildingInfo[] BuildingsInfo;
 
     private Building _buildingToCreate;
     private Tile _targetTile;
@@ -17,6 +19,7 @@ public class BuildMenager : MonoBehaviour
 
     private void Awake()
     {
+        Buildings = new BuildingsData();
         Instance = this;
     }
 
@@ -49,7 +52,7 @@ public class BuildMenager : MonoBehaviour
         _buildingToCreate.transform.position = target.transform.position;
         _buildingToCreate.GetComponent<Building>().SetDepth(target.depth + 1);
 
-        if (target.TileBehaviour.TryBuild(_buildingToCreate.GetComponent<Building>()))
+        if (target.Behaviour.TryBuild(_buildingToCreate.GetComponent<Building>()))
         {
             FindObjectOfType<Constructing_WindowControler>().SetApplyButtonActive(true);
             _buildingToCreate.GetComponentInChildren<SpriteRenderer>().color = Color.green;
@@ -64,6 +67,7 @@ public class BuildMenager : MonoBehaviour
     public void CreateBuilding()
     {
         _buildingToCreate.GetComponent<Building>().Create(_targetTile);
+        Buildings.Buildings.Add(_buildingToCreate.GetComponent<Building>());
         _buildingToCreate.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         BuildMode = false;
         _targetTile.SetOccupied(true);
@@ -101,5 +105,16 @@ public struct BuildingInfo
     public string Description;
     public ResourceItem[] Price;
     public Building buildingPrefab;
+}
+
+[System.Serializable]
+public class BuildingsData
+{
+    public List<Building> Buildings;
+
+    public BuildingsData()
+    {
+        Buildings = new List<Building>();
+    }
 }
 

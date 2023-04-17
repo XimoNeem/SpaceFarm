@@ -6,6 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class TileBehaviour_Swamp : TileBehaviour
 {
+    public override TileBehaviour GetBehaviour()
+    {
+        return new TileBehaviour_Swamp();
+    }
+
     public override void Build(Building building)
     {
         throw new System.NotImplementedException();
@@ -18,8 +23,6 @@ public class TileBehaviour_Swamp : TileBehaviour
 
     public override bool TryBuild(Building building)
     {
-        Debug.Log("SWAMP");
-
         if (building.Type == BuildingType.WaterGenerator) { return true; }
         return false;
     }

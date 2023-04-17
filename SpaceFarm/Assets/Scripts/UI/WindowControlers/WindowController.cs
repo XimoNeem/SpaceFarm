@@ -13,7 +13,7 @@ public class WindowController : MonoBehaviour
     {
         WindowObject.SetActive(state);
 
-        if (isInput)
+        if (!isInput)
         {
             InputManager.instance.isActive = !state;
         }

@@ -132,8 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnHeight: {x: 0, y: 0.4}
   SpawnWeight: 1
-  TileBehaviour: {fileID: 11400000, guid: 96798010b349810468d1405b501ced85, type: 2}
-  TileTexture: {fileID: 0}
+  Behaviour: {fileID: 11400000, guid: 96798010b349810468d1405b501ced85, type: 2}
   depth: 0
   FS: {fileID: 2122617360, guid: 68a494eaccc178642bdef9bfd60d35b8, type: 3}
 --- !u!60 &6456291592038087786

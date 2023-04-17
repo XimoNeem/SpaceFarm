@@ -37,6 +37,7 @@ public class Building : MonoBehaviour
     public virtual void Create(Tile tile)
     {
         CurrentTile = tile;
+        CurrentTile.TileBuilding = this;
         IsCreated = true;
     }
 

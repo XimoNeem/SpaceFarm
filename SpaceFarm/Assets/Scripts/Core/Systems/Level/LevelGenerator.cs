@@ -5,8 +5,9 @@ using System;
 
 public class LevelGenerator : MonoBehaviour
 {
-    [SerializeField] private Tile[] _tiles;
+    [SerializeField] private Tile[] _tilePrefabs;
     [SerializeField] private Tile _baseTile;
+    public List<Tile> Tiles;
 
     [SerializeField] private int _lenght = 20;
     [SerializeField] private int _height = 20;
@@ -19,6 +20,7 @@ public class LevelGenerator : MonoBehaviour
  
     public void Start()
     {
+        Tiles = new List<Tile>();
         GenerateLevel();
     }
 
@@ -34,7 +36,7 @@ public class LevelGenerator : MonoBehaviour
 
                 float noise = Mathf.PerlinNoise(l * _noiseScale, h * _noiseScale);
 
-                Vector3 pos = new(xPos, -yPos, 0);
+                Vector3 pos = new(xPos, -yPos, _levelParent.transform.position.z);
 
                 if (noise > 0.4f)
                 {
@@ -60,6 +62,7 @@ public class LevelGenerator : MonoBehaviour
 
         Tile tile = newTile.GetComponent<Tile>();
         tile.SetDepth(depth);
+        Tiles.Add(tile);
     }
 
     private Tile SelectTile(float value)
@@ -67,7 +70,7 @@ public class LevelGenerator : MonoBehaviour
         List<Tile> tiles = new List<Tile>();
         float totalWeights = 0;
 
-        foreach (var tile in _tiles)
+        foreach (var tile in _tilePrefabs)
         {
             if (value > tile.SpawnHeight.x & value < tile.SpawnHeight.y)
             {
