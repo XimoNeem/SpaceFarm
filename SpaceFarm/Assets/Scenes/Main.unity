@@ -1893,6 +1893,20 @@ MonoBehaviour:
     - Value: 100
       Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
     buildingPrefab: {fileID: -8373670986297103862, guid: 6ab392bc5eb21b349806723ecdd96ee9, type: 3}
+  - Name: Gold mine
+    Preview: {fileID: -1939852166, guid: 7902efb28204f944a8b563db1664034a, type: 3}
+    Description: Building for growing
+    Price:
+    - Value: 100
+      Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
+    buildingPrefab: {fileID: 6816950062956058130, guid: c15640203a6823f468c371f3535bfb4d, type: 3}
+  - Name: Water cleaner
+    Preview: {fileID: 894182194, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
+    Description: Building for growing
+    Price:
+    - Value: 100
+      Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
+    buildingPrefab: {fileID: 6816950062956058130, guid: d946d47f98277ca40aac10f63e2111bf, type: 3}
 --- !u!1 &336821290
 GameObject:
   m_ObjectHideFlags: 0
@@ -8674,7 +8688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1487848891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9093,7 +9107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1524575287
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10240,7 +10254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1631372907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11489,7 +11503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1899201278
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11826,7 +11840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1941720234
 RectTransform:
   m_ObjectHideFlags: 0

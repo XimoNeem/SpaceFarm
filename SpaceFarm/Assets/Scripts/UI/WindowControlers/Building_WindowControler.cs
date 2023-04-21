@@ -37,6 +37,8 @@ public class Building_WindowControler : WindowController
     {
         CreateItemsList();
         SetCurrentBuilding(BuildMenager.Instance.BuildingsInfo[0]);
+
+        Debug.Log($"{Game.Data.User.Data.Name} {Game.Data.User.Data.Email} {Game.Data.User.Data.ID}");
     }
 
     public void SetCurrentBuilding(BuildingInfo buildingInfo)

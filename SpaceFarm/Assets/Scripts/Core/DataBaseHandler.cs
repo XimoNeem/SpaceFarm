@@ -32,7 +32,7 @@ namespace Game.Networking
             }
         }
 
-        public static IEnumerator CreateUser(SingUpData data, Action successCallback, Action<string> errorCallback)
+        public static IEnumerator CreateUser(SignUpData data, Action<UserData> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
             form.AddField("NAME", data.Name);
@@ -51,8 +51,16 @@ namespace Game.Networking
                 }
                 else
                 {
-                    Debug.Log(request.downloadHandler.text);
-                    successCallback.Invoke();
+                    var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
+                    UserData result = new UserData
+                        (
+                            int.Parse(values["user_id"]),
+                            data.Name,
+                            data.Email,
+                            data.Password
+                        );
+
+                    successCallback.Invoke(result);
                 }
             }
         }
@@ -79,6 +87,7 @@ namespace Game.Networking
                     if (request.downloadHandler.text.StartsWith("[ERROR]"))
                     {
                         errorCallback.Invoke(request.downloadHandler.text.Replace("[ERROR]", ""));
+                        yield break;
                     }
                     var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
 
@@ -91,7 +100,6 @@ namespace Game.Networking
                             values["user_email"],
                             values["user_password"]
                         );
-                    data.Resources = resources;
 
                     successCallback.Invoke(data);
                 }

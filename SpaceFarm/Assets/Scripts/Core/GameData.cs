@@ -4,7 +4,11 @@ using UnityEngine;
 
 namespace Game.Data
 {
-    public class SingUpData
+    public static class User
+    {
+        public static UserData Data;
+    }
+    public class SignUpData
     {
         public string Name;
         public string Email;

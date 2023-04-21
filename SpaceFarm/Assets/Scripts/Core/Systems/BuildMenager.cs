@@ -32,8 +32,19 @@ public class BuildMenager : MonoBehaviour
     {
         ShowGrid(true);
         BuildMode = true;
-        _buildingToCreate = Instantiate(_currentBuilding,
-            position: new Vector3(-100, -100, 0), rotation: Quaternion.identity);
+
+        _buildingToCreate = Instantiate(_currentBuilding, new Vector3(-100, -100, 0), Quaternion.identity);
+
+        /*RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0)), Vector2.zero);
+
+        if (hit != false)
+        {
+            if (hit.transform.gameObject.GetComponent<Tile>())
+            {
+                hit.transform.gameObject.GetComponent<Tile>().OnClick();
+                EventBus.Instance.OnTileClicked.Invoke(hit.transform.gameObject.GetComponent<Tile>());
+            }
+        }*/
     }
 
     public void SetBuilding(Building newBuilding)
@@ -47,7 +58,6 @@ public class BuildMenager : MonoBehaviour
         if (!BuildMode) { return; }
 
         _targetTile = target;
-
 
         _buildingToCreate.transform.position = target.transform.position;
         _buildingToCreate.GetComponent<Building>().SetDepth(target.depth + 1);

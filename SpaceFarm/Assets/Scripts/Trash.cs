@@ -20,6 +20,7 @@ public class Trash : MonoBehaviour
                             "qwerty12345"
                         );
         data.Resources = ResourceStorage.Instance.Storage;
+        
 
 
         StartCoroutine(DataBaseHandler.SaveUser(

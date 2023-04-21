@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
+    public static InputManager Instance;
 
     public bool isActive = true;
     
@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) { instance = this; }
+        if (Instance == null) { Instance = this; }
         else { Destroy(this); }
     }
 
@@ -67,7 +67,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void CheckInput(Touch touch)
+    public void CheckInput(Touch touch)
     {
         RaycastHit2D hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(touch.position), Vector2.zero);
 

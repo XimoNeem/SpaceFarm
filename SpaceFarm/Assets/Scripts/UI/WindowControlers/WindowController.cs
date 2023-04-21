@@ -15,7 +15,7 @@ public class WindowController : MonoBehaviour
 
         if (!isInput)
         {
-            InputManager.instance.isActive = !state;
+            InputManager.Instance.isActive = !state;
         }
 
         if (_openSound != null)

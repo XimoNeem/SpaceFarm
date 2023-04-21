@@ -28,6 +28,8 @@ public class Building : MonoBehaviour
             throw;
         }
         _ResourceStorage = GetComponent<ResourceStorage>();
+
+        SetDepth(Depth);
     }
 
     /// <summary>
