@@ -16,13 +16,13 @@ public class Resource_ViewItem : MonoBehaviour
 
         icon.sprite = _resource.Icon;
 
-        FindObjectOfType<EventBus>().OnResourcesChanged.AddListener(Redraw_ui);
+        GameEvents.Instance.OnResourcesChanged.AddListener(RedrawUI);
 
-        Redraw_ui();
+        RedrawUI();
     }
 
-    public void Redraw_ui()
+    public void RedrawUI()
     {
-        textItem.text = ResourceStorage.Instance.GetResourceItem(_resource.Type).Value.ToString();
+        textItem.text = MainContext.Instance.Storage.GetResourceItem(_resource.Type).Value.ToString();
     }
 }

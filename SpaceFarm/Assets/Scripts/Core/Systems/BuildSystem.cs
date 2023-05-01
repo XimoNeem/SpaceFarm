@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildMenager : MonoBehaviour
+public class BuildSystem : MonoBehaviour
 {
     [SerializeField] private Building _currentBuilding;
 
-    public static BuildMenager Instance;
     public BuildingsData Buildings;
 
 
@@ -19,13 +18,13 @@ public class BuildMenager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         Buildings = new BuildingsData();
-        Instance = this;
     }
 
     private void Start()
     {
-        EventBus.Instance.OnTileClicked.AddListener(SetTargetTile);
+        GameEvents.Instance.OnTileClicked.AddListener(SetTargetTile);
     }
 
     public void EnterBuildingMode()
@@ -34,17 +33,6 @@ public class BuildMenager : MonoBehaviour
         BuildMode = true;
 
         _buildingToCreate = Instantiate(_currentBuilding, new Vector3(-100, -100, 0), Quaternion.identity);
-
-        /*RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0)), Vector2.zero);
-
-        if (hit != false)
-        {
-            if (hit.transform.gameObject.GetComponent<Tile>())
-            {
-                hit.transform.gameObject.GetComponent<Tile>().OnClick();
-                EventBus.Instance.OnTileClicked.Invoke(hit.transform.gameObject.GetComponent<Tile>());
-            }
-        }*/
     }
 
     public void SetBuilding(Building newBuilding)

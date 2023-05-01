@@ -39,7 +39,7 @@ public class Traiding_WindowController : WindowController
 
     private IEnumerator CreateItemsList()
     {
-        foreach (var item in ResourceStorage.Instance.Storage.crops)
+        foreach (var item in MainContext.Instance.Storage.Storage.crops)
         {
             CreateTraidingItem(item);
             yield return new WaitForEndOfFrame();
@@ -62,7 +62,7 @@ public class Traiding_WindowController : WindowController
         helper._previeImage.sprite = resource.Resource.Icon;
         helper._currentResource = resource.Resource;
         helper._button.onClick.AddListener( delegate { SoundManager.Instance.PlaySound(SFXType.Click); } );
-        helper._button.onClick.AddListener( delegate { ShowSellWindow(resource, ResourceStorage.Instance.GetResourceItem(ResourceType.Gold)); } );
+        helper._button.onClick.AddListener( delegate { ShowSellWindow(resource, MainContext.Instance.Storage.GetResourceItem(ResourceType.Gold)); } );
     }
 
     private void ShowSellWindow(ResourceItem fromItem, ResourceItem toItem)
@@ -88,12 +88,12 @@ public class Traiding_WindowController : WindowController
         _value = (int)value;
 
         _sellFromText.text = value.ToString();
-        _sellToText.text = (ResourceStorage.Instance.ExchangeRate.GetRate(_fromType, _toType) * _value).ToString();
+        _sellToText.text = (MainContext.Instance.Storage.ExchangeRate.GetRate(_fromType, _toType) * _value).ToString();
     }
 
     public void Trade()
     {
-        if (ResourceStorage.Instance.Trade(_fromType, _toType, _value))
+        if (MainContext.Instance.Storage.Trade(_fromType, _toType, _value))
         {
             _sellWindow.SetActive(false);
         }

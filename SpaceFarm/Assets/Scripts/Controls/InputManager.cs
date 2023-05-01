@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
-
-    public bool isActive = true;
+    public bool IsActive = true;
     
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
     private Vector3 _mousePosition;
     private Vector3 _camOffset;
 
@@ -17,31 +13,27 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) { Instance = this; }
-        else { Destroy(this); }
-    }
-
-    private void Start()
-    {
-        _camera = Camera.main;
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
     {
-        if (!isActive) { return; }
+        if (!IsActive) { return; }
 
-#if UNITY_ANDROID
         if (Input.touchCount > 0)
         {
             CheckInput(Input.GetTouch(0));
         }
-#endif
 
         MoveCamera();
     }
 
     private void MoveCamera()
     {
+        if (_camera == null)
+        {
+            _camera = Camera.main;
+        }
         Vector3 currentPos = _camera.transform.position;
 
         if (Input.touchCount > 0)
@@ -75,14 +67,14 @@ public class InputManager : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
-                if (hit.transform.gameObject.GetComponent<Tile>())
+                if (hit.transform.TryGetComponent<Tile>(out Tile tile))
                 {
-                    hit.transform.gameObject.GetComponent<Tile>().OnClick();
-                    EventBus.Instance.OnTileClicked.Invoke(hit.transform.gameObject.GetComponent<Tile>());
+                    tile.OnClick();
+                    GameEvents.Instance.OnTileClicked.Invoke(tile);
                 }
-                else if (hit.transform.gameObject.GetComponent<Building>())
+                else if (hit.transform.TryGetComponent<Building>(out Building building))
                 {
-                    hit.transform.gameObject.GetComponent<Building>().OnClick();
+                    building.OnClick();
                 }
             }
         }

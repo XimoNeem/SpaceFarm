@@ -32,12 +32,12 @@ namespace Game.Networking
             }
         }
 
-        public static IEnumerator CreateUser(SignUpData data, Action<UserData> successCallback, Action<string> errorCallback)
+        public static IEnumerator CreateUser(string name, string email, string password, Action<UserData, ResourceStorage> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
-            form.AddField("NAME", data.Name);
-            form.AddField("EMAIL", data.Email);
-            form.AddField("PASSWORD", data.Password);
+            form.AddField("NAME", name);
+            form.AddField("EMAIL", email);
+            form.AddField("PASSWORD", password);
 
             using (UnityWebRequest request = UnityWebRequest.Post("http://nevile.pluton-host.ru/gamedata/create_user.php", form))
             {
@@ -55,17 +55,17 @@ namespace Game.Networking
                     UserData result = new UserData
                         (
                             int.Parse(values["user_id"]),
-                            data.Name,
-                            data.Email,
-                            data.Password
+                            name,
+                            email,
+                            password
                         );
 
-                    successCallback.Invoke(result);
+                    successCallback.Invoke(result, new ResourceStorage(new StorageInfo()));
                 }
             }
         }
 
-        public static IEnumerator GetUser(string email, string password, Action<UserData> successCallback, Action<string> errorCallback)
+        public static IEnumerator GetUser(string email, string password, Action<UserData, ResourceStorage> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
             form.AddField("GET_USER_EMAIL", email);
@@ -101,7 +101,7 @@ namespace Game.Networking
                             values["user_password"]
                         );
 
-                    successCallback.Invoke(data);
+                    successCallback.Invoke(data, new ResourceStorage(resources));
                 }
             }
         }

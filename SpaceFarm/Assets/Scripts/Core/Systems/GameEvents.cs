@@ -1,24 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class EventBus : MonoBehaviour
+public class GameEvents : MonoBehaviour
 {
     public UnityEvent OnResourcesChanged;
+    public UnityEvent OnMainLoaded;
     public UnityEvent OnGrow;
     public UnityEvent OnMove;
     public UnityEvent<Tile> OnTileClicked;
-    
 
-    public static EventBus Instance;
-
-    private ResourceStorage _ResourceStorage;
+    public static GameEvents Instance;
 
     private void Awake()
     {
         if (Instance == null) { Instance = this; }
         else { Destroy(this); }
+
+        DontDestroyOnLoad(this);
 
         StartCoroutine(Timer_Grow());
         StartCoroutine(Timer_Move());

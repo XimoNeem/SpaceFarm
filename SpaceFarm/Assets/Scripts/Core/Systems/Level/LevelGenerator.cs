@@ -14,19 +14,21 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] private Vector2 _tileSize;
 
-    [SerializeField] private Transform _levelParent, _buildingsParent;
+    [SerializeField] private Transform _levelParent;
 
     [SerializeField] private float _noiseScale = 0.05f;
- 
-    public void Start()
+
+    private void Awake()
     {
-        Tiles = new List<Tile>();
-        GenerateLevel();
+        DontDestroyOnLoad(this);
     }
 
 
     public void GenerateLevel()
     {
+        _levelParent = new GameObject("LevelParent").transform;
+        Tiles = new List<Tile>();
+
         for (int h = 0; h < _height; h++)
         {
             for (int l = 0; l < _lenght; l++)

@@ -1,31 +1,15 @@
-using Game.Networking;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Game.Data;
 
-public class ResourceStorage : MonoBehaviour
+[System.Serializable]
+public class ResourceStorage
 {
-    public static ResourceStorage Instance;
+    public StorageInfo Storage { get; set; }
+    public ExchangeRate ExchangeRate { get; private set; }
 
-    public StorageInfo Storage;
-    public ExchangeRate ExchangeRate;
-
-    private void Awake()
+    public ResourceStorage(StorageInfo storage)
     {
-        if (Instance == null) { Instance = this; }
-        else { Destroy(this); }
-    }
-
-    public void PrintError(string test)
-    {
-        Debug.LogError(test);
-    }
-
-    public void PrintUser(UserData data)
-    {
-        print(data.ToString());
-        print(data.Resources.resources[0].Value);
+        Storage = storage;
     }
 
     public ResourceItem GetResourceItem(ResourceType type)
@@ -75,7 +59,7 @@ public class ResourceItem
     {
         Value += value;
 
-        GameObject.FindObjectOfType<EventBus>().OnResourcesChanged.Invoke();
+        GameObject.FindObjectOfType<GameEvents>().OnResourcesChanged.Invoke();
 
         return true;
     }
@@ -86,7 +70,7 @@ public class ResourceItem
         {
             Value -= value;
 
-            GameObject.FindObjectOfType<EventBus>().OnResourcesChanged.Invoke();
+            GameObject.FindObjectOfType<GameEvents>().OnResourcesChanged.Invoke();
 
             return true;
         }

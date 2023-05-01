@@ -8,7 +8,7 @@ public class Trash : MonoBehaviour
 {
     public void SaveBuildings()
     {
-        string str = JsonUtility.ToJson(BuildMenager.Instance.Buildings);
+        string str = JsonUtility.ToJson(MainContext.Instance.BuildSystem.Buildings);
         Debug.Log(str);
     }
     public void Save()
@@ -19,7 +19,7 @@ public class Trash : MonoBehaviour
                             "testmail@gmail.com",
                             "qwerty12345"
                         );
-        data.Resources = ResourceStorage.Instance.Storage;
+        data.Resources = MainContext.Instance.Storage.Storage;
         
 
 
@@ -41,18 +41,18 @@ public class Trash : MonoBehaviour
 
     public void Add()
     {
-        ResourceStorage.Instance.GetResourceItem(ResourceType.Gems).AddValue(1);
+        MainContext.Instance.Storage.GetResourceItem(ResourceType.Gems).AddValue(1);
     }
 
     public void Lose()
     {
-        ResourceStorage.Instance.GetResourceItem(ResourceType.Gems).LoseValue(1);
+        MainContext.Instance.Storage.GetResourceItem(ResourceType.Gems).LoseValue(1);
     }
 
     private void SetUser(UserData data)
     {
-        ResourceStorage.Instance.Storage = data.Resources;
-        GameObject.FindObjectOfType<EventBus>().OnResourcesChanged.Invoke();
+        MainContext.Instance.Storage.Storage = data.Resources;
+        GameObject.FindObjectOfType<GameEvents>().OnResourcesChanged.Invoke();
     }
 
     private void PrintError(string text)

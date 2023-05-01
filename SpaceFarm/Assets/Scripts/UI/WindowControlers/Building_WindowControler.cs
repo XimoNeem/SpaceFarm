@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -18,7 +16,7 @@ public class Building_WindowControler : WindowController
 
     private void CreateItemsList()
     {
-        foreach (var item in BuildMenager.Instance.BuildingsInfo)
+        foreach (var item in MainContext.Instance.BuildSystem.BuildingsInfo)
         {
             CreateBuildingItem(item);
         }
@@ -36,14 +34,12 @@ public class Building_WindowControler : WindowController
     void Start()
     {
         CreateItemsList();
-        SetCurrentBuilding(BuildMenager.Instance.BuildingsInfo[0]);
-
-        Debug.Log($"{Game.Data.User.Data.Name} {Game.Data.User.Data.Email} {Game.Data.User.Data.ID}");
+        SetCurrentBuilding(MainContext.Instance.BuildSystem.BuildingsInfo[0]);
     }
 
     public void SetCurrentBuilding(BuildingInfo buildingInfo)
     {
-        BuildMenager.Instance.SetBuilding(buildingInfo.buildingPrefab);
+        MainContext.Instance.BuildSystem.SetBuilding(buildingInfo.buildingPrefab);
         _currenBuilding = buildingInfo;
         previewImage.sprite = _currenBuilding.Preview;
         nameText.text = _currenBuilding.Name;
@@ -67,7 +63,7 @@ public class Building_WindowControler : WindowController
             try
             {
                 int costValue = item.Value;
-                int playerValue = ResourceStorage.Instance.GetResourceItem(item.Resource.Type).Value;
+                int playerValue = MainContext.Instance.Storage.GetResourceItem(item.Resource.Type).Value;
 
                 if (costValue > playerValue)
                 {
@@ -81,7 +77,7 @@ public class Building_WindowControler : WindowController
 
         if (state)
         {
-            FindObjectOfType<BuildMenager>().EnterBuildingMode();
+            FindObjectOfType<BuildSystem>().EnterBuildingMode();
             FindObjectOfType<Main_WindowController>().ShowWindow(false);
             FindObjectOfType<Constructing_WindowControler>().ShowWindow(true);
             FindObjectOfType<Constructing_WindowControler>().SetApplyButtonActive(false);
@@ -89,7 +85,7 @@ public class Building_WindowControler : WindowController
             foreach (var item in _currenBuilding.Price)
             {
                 int costValue = item.Value;
-                ResourceStorage.Instance.GetResourceItem(item.Resource.Type).LoseValue(costValue);
+                MainContext.Instance.Storage.GetResourceItem(item.Resource.Type).LoseValue(costValue);
             }
 
             this.ShowWindow(false);

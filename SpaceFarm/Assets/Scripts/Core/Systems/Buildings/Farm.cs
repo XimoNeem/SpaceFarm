@@ -13,7 +13,7 @@ public class Farm : Building
     {
         base.Create(tile);
 
-        EventBus.Instance.OnMove.AddListener(GetIncome);
+        GameEvents.Instance.OnMove.AddListener(GetIncome);
     }
     public override void GetIncome() // Каждые 10 секунд
     {
@@ -29,7 +29,7 @@ public class Farm : Building
             _progress = 0;
             foreach (ResourceItem resource in IncomeItems)
             {
-                ResourceStorage.Instance.GetResourceItem(resource.Resource.Type).AddValue(resource.Value);
+                MainContext.Instance.Storage.GetResourceItem(resource.Resource.Type).AddValue(resource.Value);
             }
         }
     }

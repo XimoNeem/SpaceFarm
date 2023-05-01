@@ -15,14 +15,14 @@ public class Constructing_WindowControler : WindowController
 
     public void ApplyBuild()
     {
-        FindObjectOfType<BuildMenager>().CreateBuilding();
+        FindObjectOfType<BuildSystem>().CreateBuilding();
         this.ShowWindow(false);
         FindObjectOfType<Main_WindowController>().ShowWindow(true);
     }
    
     public void CancelBuild()
     {
-        FindObjectOfType<BuildMenager>().CancelBuilding();
+        FindObjectOfType<BuildSystem>().CancelBuilding();
         this.ShowWindow(false);
         FindObjectOfType<Building_WindowControler>().ShowWindow(true);
     }

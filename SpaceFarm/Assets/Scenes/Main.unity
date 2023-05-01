@@ -1761,8 +1761,6 @@ GameObject:
   m_Component:
   - component: {fileID: 314665562}
   - component: {fileID: 314665567}
-  - component: {fileID: 314665566}
-  - component: {fileID: 314665564}
   - component: {fileID: 314665568}
   m_Layer: 0
   m_Name: Core
@@ -1770,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &314665562
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,60 +1784,6 @@ Transform:
   m_Father: {fileID: 1422149798}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &314665564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314665561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fede7df1cdeb0478a8ad964a2ec499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnResourcesChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGrow:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMove:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTileClicked:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &314665566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314665561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33362cef9a9f0b14b86608c8e20a3f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Storage:
-    resources:
-    - Value: 10
-      Resource: {fileID: 11400000, guid: 6522af0aa6b74a7499a40d8c8d55d002, type: 2}
-    - Value: 10000
-      Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
-    - Value: 100
-      Resource: {fileID: 11400000, guid: fa1b026dbe2dde04cb9726ed87cc9fff, type: 2}
-    - Value: 100
-      Resource: {fileID: 11400000, guid: 02980a9f2a463d14bb1e0b4784a1cd1d, type: 2}
-    crops:
-    - Value: 10
-      Resource: {fileID: 11400000, guid: d3c64c127f5951848872ad95bdd4c861, type: 2}
-    - Value: 10
-      Resource: {fileID: 11400000, guid: b5ba5770b1179b54ab5bb5565d10769d, type: 2}
-    - Value: 10
-      Resource: {fileID: 11400000, guid: a554e188f7ad56249a1b76836c264545, type: 2}
-  ExchangeRate: {fileID: 11400000, guid: a6bbb8b853ba4044e854b81e16c350a7, type: 2}
 --- !u!114 &314665567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,7 +1812,6 @@ MonoBehaviour:
   _height: 40
   _tileSize: {x: 2.05, y: 0.59}
   _levelParent: {fileID: 357948526}
-  _buildingsParent: {fileID: 0}
   _noiseScale: 0.1
 --- !u!114 &314665568
 MonoBehaviour:
@@ -4054,7 +3997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &711441778
 Transform:
   m_ObjectHideFlags: 0
@@ -4082,7 +4025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24cca4a481b33647a7b9bbe886446e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 1
+  IsActive: 1
+  _camera: {fileID: 0}
   _sensivity: 0.02
 --- !u!1 &738715872
 GameObject:
@@ -11242,7 +11186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1830953908
 Transform:
   m_ObjectHideFlags: 0

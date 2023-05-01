@@ -20,7 +20,7 @@ public class Filed : Building
             if (_crop.Type == ResourceType.None) _fieldController.SetFileld(this);
             else if(_currentStage == _maxStage)
             {
-                ResourceStorage.Instance.GetResourceItem(_crop.Type).AddValue(10);
+                MainContext.Instance.Storage.GetResourceItem(_crop.Type).AddValue(10);
 
                 _crop = _noneCrope;
                 Renderer.sprite = null;
@@ -34,7 +34,7 @@ public class Filed : Building
     {
         base.Create(tile);
 
-        EventBus.Instance.OnGrow.AddListener(GetIncome);
+        GameEvents.Instance.OnGrow.AddListener(GetIncome);
         CurrentTile.SetField(true);
         CurrentTile.SetOccupied(true);
     }
