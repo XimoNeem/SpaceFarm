@@ -2920,12 +2920,15 @@ MonoBehaviour:
     Name: 
     Email: 
     Password: 
-    Resources:
-      resources: []
-      crops: []
+    Storage:
+      Resources:
+        resources: []
+        crops: []
+  ExchangeRate: {fileID: 0}
   BuildSystem: {fileID: 546804834}
   LevelGenerator: {fileID: 546804835}
   InputManager: {fileID: 1976688906}
+  SoundManager: {fileID: 2026297690}
 --- !u!4 &908297358
 Transform:
   m_ObjectHideFlags: 0

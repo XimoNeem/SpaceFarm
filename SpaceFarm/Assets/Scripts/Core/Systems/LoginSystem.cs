@@ -8,8 +8,6 @@ public class LoginSystem : MonoBehaviour
 {
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
         if (GetKeys())
         {
             StartCoroutine(DataBaseHandler.GetUser
@@ -49,7 +47,7 @@ public class LoginSystem : MonoBehaviour
         if (!GetKeys()) { SaveLoginData(data.Email, data.Password); }
 
         MainContext.Instance.User = data;
-        MainContext.Instance.Storage = storage;
+        MainContext.Instance.User.Storage = storage;
         SceneLoader.Instance.LoadScene(Scenes.MAIN);
     }
 

@@ -29,7 +29,7 @@ public class Farm : Building
             _progress = 0;
             foreach (ResourceItem resource in IncomeItems)
             {
-                MainContext.Instance.Storage.GetResourceItem(resource.Resource.Type).AddValue(resource.Value);
+                MainContext.Instance.User.Storage.GetResourceItem(resource.Resource.Type).AddValue(resource.Value);
             }
         }
     }

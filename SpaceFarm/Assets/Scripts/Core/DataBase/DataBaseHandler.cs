@@ -10,34 +10,16 @@ namespace Game.Networking
 {
     public static class DataBaseHandler
     {
-        public static IEnumerator CheckConnection(Action successCallback, Action errorCallback)
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("CHECK_CONNECTION", "test");
-
-            using (UnityWebRequest request = UnityWebRequest.Post("http://nevile.pluton-host.ru/gamedata/", form))
-            {
-                yield return request.SendWebRequest();
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError(request.error);
-                    errorCallback.Invoke();
-                    yield break;
-                }
-                else
-                {
-                    successCallback.Invoke();
-                }
-            }
-        }
-
         public static IEnumerator CreateUser(string name, string email, string password, Action<UserData, ResourceStorage> successCallback, Action<string> errorCallback)
         {
+            string filePath = "Res/defaultStorage";
+            string resourcesJson = Resources.Load<TextAsset>(filePath).text;
+
             WWWForm form = new WWWForm();
             form.AddField("NAME", name);
             form.AddField("EMAIL", email);
             form.AddField("PASSWORD", password);
+            form.AddField("RESOURCES", resourcesJson);
 
             using (UnityWebRequest request = UnityWebRequest.Post("http://nevile.pluton-host.ru/gamedata/create_user.php", form))
             {
@@ -51,6 +33,7 @@ namespace Game.Networking
                 }
                 else
                 {
+                    Debug.Log(request.downloadHandler.text);
                     var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
                     UserData result = new UserData
                         (
@@ -60,7 +43,9 @@ namespace Game.Networking
                             password
                         );
 
-                    successCallback.Invoke(result, new ResourceStorage(new StorageInfo()));
+                    StorageInfo storage = JsonUtility.FromJson<StorageInfo>(resourcesJson);
+
+                    successCallback.Invoke(result, new ResourceStorage(storage));
                 }
             }
         }
@@ -77,7 +62,6 @@ namespace Game.Networking
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError(request.error);
                     errorCallback.Invoke(request.error);
                     yield break;
                 }
@@ -91,9 +75,6 @@ namespace Game.Networking
                     }
                     var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
 
-
-                    StorageInfo resources = JsonUtility.FromJson<StorageInfo>(values["user_resources"]);
-
                     UserData data = new UserData(
                             int.Parse(values["user_id"]),
                             values["user_name"],
@@ -101,6 +82,7 @@ namespace Game.Networking
                             values["user_password"]
                         );
 
+                    StorageInfo resources = JsonUtility.FromJson<StorageInfo>(values["user_resources"]);
                     successCallback.Invoke(data, new ResourceStorage(resources));
                 }
             }
@@ -108,7 +90,7 @@ namespace Game.Networking
 
         public static IEnumerator SaveUser(UserData data, Action successCallback, Action<string> errorCallback)
         {
-            string resourcesJson = JsonUtility.ToJson(data.Resources);
+            string resourcesJson = JsonUtility.ToJson(data.Storage.Resources);
 
             WWWForm form = new WWWForm();
             form.AddField("ID", data.ID);
@@ -160,7 +142,7 @@ namespace Game.Networking
                             values["user_email"],
                             values["user_password"]
                         );
-                    data.Resources = resources;
+                    data.Storage.Resources = resources;
 
                     successCallback.Invoke(data);
                 }

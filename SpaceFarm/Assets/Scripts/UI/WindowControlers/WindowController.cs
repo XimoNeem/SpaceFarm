@@ -22,11 +22,11 @@ public class WindowController : MonoBehaviour
         {
             if (state)
             {
-                SoundManager.Instance.PlaySound(_openSound);
+                MainContext.Instance.SoundManager.PlaySound(_openSound);
             }
             else
             {
-                SoundManager.Instance.PlaySound(_closeSound);
+                MainContext.Instance.SoundManager.PlaySound(_closeSound);
             }
         }
     }

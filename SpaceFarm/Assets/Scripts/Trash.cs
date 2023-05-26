@@ -6,57 +6,28 @@ using Game.Networking;
 
 public class Trash : MonoBehaviour
 {
-    public void SaveBuildings()
+    public StorageInfo data;
+
+    private void Start()
     {
-        string str = JsonUtility.ToJson(MainContext.Instance.BuildSystem.Buildings);
-        Debug.Log(str);
+        GameEvents.Instance.OnResourcesChanged.AddListener(Save);
+        string resourcesJson = JsonUtility.ToJson(data);
+        Debug.Log(resourcesJson);
     }
+
+    public void Done()
+    {
+        Debug.Log("Save");
+    }
+
+    public void Error(string message)
+    {
+        Debug.LogError(message);
+    }
+
     public void Save()
     {
-        UserData data = new UserData(
-                            1,
-                            "Mikhail",
-                            "testmail@gmail.com",
-                            "qwerty12345"
-                        );
-        data.Resources = MainContext.Instance.Storage.Storage;
-        
-
-
-        StartCoroutine(DataBaseHandler.SaveUser(
-                data,
-                delegate { Debug.Log("Done"); },
-                PrintError
-            ));
-    }
-
-    public void Load()
-    {
-        StartCoroutine(DataBaseHandler.LoadUserData(
-                1,
-                SetUser,
-                PrintError
-            ));
-    }
-
-    public void Add()
-    {
-        MainContext.Instance.Storage.GetResourceItem(ResourceType.Gems).AddValue(1);
-    }
-
-    public void Lose()
-    {
-        MainContext.Instance.Storage.GetResourceItem(ResourceType.Gems).LoseValue(1);
-    }
-
-    private void SetUser(UserData data)
-    {
-        MainContext.Instance.Storage.Storage = data.Resources;
-        GameObject.FindObjectOfType<GameEvents>().OnResourcesChanged.Invoke();
-    }
-
-    private void PrintError(string text)
-    {
-        Debug.LogError(text);
+        Debug.Log("Saving...");
+        StartCoroutine(DataBaseHandler.SaveUser(MainContext.Instance.User, Done, Error));
     }
 }

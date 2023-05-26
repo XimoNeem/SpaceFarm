@@ -20,7 +20,7 @@ public class Filed : Building
             if (_crop.Type == ResourceType.None) _fieldController.SetFileld(this);
             else if(_currentStage == _maxStage)
             {
-                MainContext.Instance.Storage.GetResourceItem(_crop.Type).AddValue(10);
+                MainContext.Instance.User.Storage.GetResourceItem(_crop.Type).AddValue(10);
 
                 _crop = _noneCrope;
                 Renderer.sprite = null;

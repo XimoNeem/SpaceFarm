@@ -10,7 +10,6 @@ public class Building : MonoBehaviour
     public int Height = 1, Width = 1;
     public int Depth;
     public SpriteRenderer Renderer;
-    private ResourceStorage _ResourceStorage;
     public Tile CurrentTile;
 
     private int level;
@@ -27,7 +26,6 @@ public class Building : MonoBehaviour
         {
             throw;
         }
-        _ResourceStorage = GetComponent<ResourceStorage>();
 
         SetDepth(Depth);
     }

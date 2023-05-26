@@ -35,7 +35,7 @@ public class Shop_WindowControler : WindowController
         helper._nameText.text = building_info.Name;
         helper._previeImage.sprite = building_info.Preview;
         helper._currentBuilding = building_info;
-        helper._button.onClick.AddListener( delegate { SoundManager.Instance.PlaySound(SFXType.Click); } );
+        helper._button.onClick.AddListener( delegate { MainContext.Instance.SoundManager.PlaySound(SFXType.Click); } );
     }
 
     void Start()
@@ -52,7 +52,7 @@ public class Shop_WindowControler : WindowController
             try
             {
                 int costValue = item.Value;
-                int playerValue = MainContext.Instance.Storage.GetResourceItem(item.Resource.Type).Value;
+                int playerValue = MainContext.Instance.User.Storage.GetResourceItem(item.Resource.Type).Value;
 
                 if (costValue > playerValue)
                 {
@@ -74,7 +74,7 @@ public class Shop_WindowControler : WindowController
             foreach (var item in _currenBuilding.Price)
             {
                 int costValue = item.Value;
-                MainContext.Instance.Storage.GetResourceItem(item.Resource.Type).LoseValue(costValue);
+                MainContext.Instance.User.Storage.GetResourceItem(item.Resource.Type).LoseValue(costValue);
             }
 
             this.ShowWindow(false);

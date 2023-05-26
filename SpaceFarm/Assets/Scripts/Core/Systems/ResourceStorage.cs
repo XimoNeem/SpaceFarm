@@ -4,19 +4,23 @@ using Game.Data;
 [System.Serializable]
 public class ResourceStorage
 {
-    public StorageInfo Storage { get; set; }
-    public ExchangeRate ExchangeRate { get; private set; }
+    public StorageInfo Resources;
 
     public ResourceStorage(StorageInfo storage)
     {
-        Storage = storage;
+        Resources = storage;
+    }
+
+    public ResourceStorage()
+    {
+
     }
 
     public ResourceItem GetResourceItem(ResourceType type)
     {
         ResourceItem result = null;
 
-        foreach (var resource in Storage.resources)
+        foreach (var resource in Resources.resources)
         {
             if (resource.Resource.Type == type)
             { 
@@ -24,7 +28,7 @@ public class ResourceStorage
                 return result;
             }
         }
-        foreach (var resource in Storage.crops)
+        foreach (var resource in Resources.crops)
         {
             if (resource.Resource.Type == type)
             {
@@ -41,7 +45,7 @@ public class ResourceStorage
 
         if (GetResourceItem(fromType).LoseValue(value))
         {
-            GetResourceItem(toType).AddValue(ExchangeRate.GetRate(fromType, toType) * value);
+            GetResourceItem(toType).AddValue(MainContext.Instance.ExchangeRate.GetRate(fromType, toType) * value);
             return true;
         }
 

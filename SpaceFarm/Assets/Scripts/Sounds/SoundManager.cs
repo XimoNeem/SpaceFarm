@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    //public static SoundManager Instance;
 
-    [SerializeField] private AudioSource[] _audioSources = new AudioSource[3];
+    [SerializeField] private AudioSource[] _audioSources;
 
     [SerializeField] private PresetsSound[] _presetsSounds;
 
@@ -16,14 +16,11 @@ public class SoundManager : MonoBehaviour
 
     private int _currentIndex = 0;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (Instance == null) { Instance = this; }
-        else { Destroy(this); }
-    }
+        _audioSources = new AudioSource[3];
+        DontDestroyOnLoad(this);
 
-    private void Start()
-    {
         for (int i = 0; i < _audioSources.Length; i++)
         {
             _audioSources[i] = gameObject.AddComponent<AudioSource>();

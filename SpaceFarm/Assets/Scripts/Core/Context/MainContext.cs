@@ -7,10 +7,11 @@ public class MainContext : MonoBehaviour
     public static MainContext Instance;
 
     public UserData User;
-    public ResourceStorage Storage;
+    public ExchangeRate ExchangeRate;
     public BuildSystem BuildSystem;
     public LevelGenerator LevelGenerator;
     public InputManager InputManager;
+    public SoundManager SoundManager;
 
     private void Awake()
     {

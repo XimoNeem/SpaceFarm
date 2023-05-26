@@ -7,7 +7,7 @@
         public string Name;
         public string Email;
         public string Password;
-        public StorageInfo Resources;
+        public ResourceStorage Storage;
         public LevelData LevelData;
 
         public UserData(int id, string name, string email, string password)

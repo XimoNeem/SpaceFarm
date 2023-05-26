@@ -23,6 +23,6 @@ public class Resource_ViewItem : MonoBehaviour
 
     public void RedrawUI()
     {
-        textItem.text = MainContext.Instance.Storage.GetResourceItem(_resource.Type).Value.ToString();
+        textItem.text = MainContext.Instance.User.Storage.GetResourceItem(_resource.Type).Value.ToString();
     }
 }
