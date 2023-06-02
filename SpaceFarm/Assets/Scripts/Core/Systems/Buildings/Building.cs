@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public int ID;
     public bool IsCreated = false;
-
     public BuildingType Type;
     public int Height = 1, Width = 1;
     public int Depth;
     public SpriteRenderer Renderer;
     public Tile CurrentTile;
 
-    private int level;
+    public int Level;
+    public int Progress;
     public ResourceItem[] IncomeItems;
-    
 
-    public virtual void Start()
+    private void Awake()
     {
         try
         {
@@ -30,11 +30,16 @@ public class Building : MonoBehaviour
         SetDepth(Depth);
     }
 
+    public virtual void Start()
+    {
+
+    }
+
     /// <summary>
     /// Эта функция вызывется при создании построки
     /// </summary>
     /// <param name="tile"></param>
-    public virtual void Create(Tile tile)
+    public virtual void Initialize(Tile tile)
     {
         CurrentTile = tile;
         CurrentTile.TileBuilding = this;
@@ -44,11 +49,15 @@ public class Building : MonoBehaviour
     public void SetDepth(int value)
     {
         Depth = value;
-        if (Renderer != null)
-        {
-            Renderer.sortingOrder = Depth;
-        }
+        if (Renderer == null) { return; }
+        
+        Renderer.sortingOrder = Depth;
         this.transform.position += -Vector3.forward;
+    }
+
+    public void SetTile(Tile tile)
+    {
+        CurrentTile = tile;
     }
 
     public virtual void OnClick()

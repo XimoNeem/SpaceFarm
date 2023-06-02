@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class BuildSystem : MonoBehaviour
 {
-    [SerializeField] private Building _currentBuilding;
-
-    public BuildingsData Buildings;
-
+    [SerializeField] private BuildingInfo _currentBuilding;
 
     public BuildingInfo[] BuildingsInfo;
+
+    public Dictionary<int, BuildingInfo> Buildings;
 
     private Building _buildingToCreate;
     private Tile _targetTile;
@@ -19,7 +18,13 @@ public class BuildSystem : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        Buildings = new BuildingsData();
+
+        Buildings = new Dictionary<int, BuildingInfo>();
+
+        foreach (var item in BuildingsInfo)
+        {
+            Buildings.Add(item.buildingPrefab.ID, item);
+        }
     }
 
     private void Start()
@@ -32,10 +37,10 @@ public class BuildSystem : MonoBehaviour
         ShowGrid(true);
         BuildMode = true;
 
-        _buildingToCreate = Instantiate(_currentBuilding, new Vector3(-100, -100, 0), Quaternion.identity);
+        _buildingToCreate = Instantiate(_currentBuilding.buildingPrefab, new Vector3(-100, -100, 0), Quaternion.identity);
     }
 
-    public void SetBuilding(Building newBuilding)
+    public void SetBuilding(BuildingInfo newBuilding)
     {
         _currentBuilding = newBuilding;
     }
@@ -48,7 +53,9 @@ public class BuildSystem : MonoBehaviour
         _targetTile = target;
 
         _buildingToCreate.transform.position = target.transform.position;
-        _buildingToCreate.GetComponent<Building>().SetDepth(target.depth + 1);
+        _buildingToCreate.transform.localScale = target.transform.localScale;
+        _buildingToCreate.SetTile(_targetTile);
+        _buildingToCreate.SetDepth(target.depth + 1);
 
         if (target.Behaviour.TryBuild(_buildingToCreate.GetComponent<Building>()))
         {
@@ -64,12 +71,30 @@ public class BuildSystem : MonoBehaviour
 
     public void CreateBuilding()
     {
-        _buildingToCreate.GetComponent<Building>().Create(_targetTile);
-        Buildings.Buildings.Add(_buildingToCreate.GetComponent<Building>());
-        _buildingToCreate.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-        BuildMode = false;
+        _buildingToCreate.Initialize(_targetTile);
+        _buildingToCreate.Renderer.color = Color.white;
         _targetTile.SetOccupied(true);
+
+        BuildMode = false;
+
+        foreach (var item in _currentBuilding.Price)
+        {
+            int costValue = item.Value;
+            MainContext.Instance.User.Storage.GetResourceItem(item.Resource.Type).LoseValue(costValue);
+        }
+
+        GameEvents.Instance.OnBuildingCreated.Invoke();
         ShowGrid(false);
+    }
+
+    public void RestoreBuilding(Tile tile, Game.Data.BuildingSaveItem data, GameObject buildingPrefab)
+    {
+        Building building = Instantiate(buildingPrefab).GetComponent<Building>();
+
+        building.SetDepth(tile.depth++);
+        building.transform.position = tile.transform.position;
+        building.Progress = data.Progress;
+        building.Initialize(tile);
     }
 
     public void CancelBuilding()
@@ -103,16 +128,5 @@ public struct BuildingInfo
     public string Description;
     public ResourceItem[] Price;
     public Building buildingPrefab;
-}
-
-[System.Serializable]
-public class BuildingsData
-{
-    public List<Building> Buildings;
-
-    public BuildingsData()
-    {
-        Buildings = new List<Building>();
-    }
 }
 

@@ -17,6 +17,9 @@
             Email = email;
             Password = password;
 
+            LevelData = new LevelData();
+
+
             GameEvents.Instance.OnMainLoaded.AddListener(CreateLevel);
         }
         public override string ToString()

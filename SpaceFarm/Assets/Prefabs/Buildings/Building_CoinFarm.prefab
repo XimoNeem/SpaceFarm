@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14010f41125d6541a93b0a661d69bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 2
   IsCreated: 0
   Type: 3
   Height: 1
@@ -137,11 +138,11 @@ MonoBehaviour:
   Depth: 0
   Renderer: {fileID: 0}
   CurrentTile: {fileID: 0}
+  Level: 0
   IncomeItems:
   - Value: 1
     Resource: {fileID: 11400000, guid: ad996d91382e0b0468d21659588a258a, type: 2}
   _progress: 0
-  _maxProgress: 20
   _sprites:
   - {fileID: -1939852166, guid: 7902efb28204f944a8b563db1664034a, type: 3}
   - {fileID: 2126455923, guid: 7902efb28204f944a8b563db1664034a, type: 3}

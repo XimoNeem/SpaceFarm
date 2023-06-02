@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class Farm : Building
 {
-    [SerializeField] private int _progress = 0;
-    [SerializeField] private int _maxProgress = 10;
+    [SerializeField] private int _maxProgress => _sprites.Length;
 
     [SerializeField] private Sprite[] _sprites;
 
-    public override void Create(Tile tile)
+    public override void Initialize(Tile tile)
     {
-        base.Create(tile);
+        base.Initialize(tile);
 
         GameEvents.Instance.OnMove.AddListener(GetIncome);
     }
     public override void GetIncome() // Каждые 10 секунд
     {
-        _progress += 1;
+        Progress += 1;
 
-        if (_progress < _maxProgress)
+        if (Progress < _maxProgress)
         {
-            Renderer.sprite = _sprites[_progress];
+            Renderer.sprite = _sprites[Progress];
         }
 
-        else if (_progress == _maxProgress)
+        else if (Progress == _maxProgress)
         {
-            _progress = 0;
+            Progress = 0;
             foreach (ResourceItem resource in IncomeItems)
             {
                 MainContext.Instance.User.Storage.GetResourceItem(resource.Resource.Type).AddValue(resource.Value);

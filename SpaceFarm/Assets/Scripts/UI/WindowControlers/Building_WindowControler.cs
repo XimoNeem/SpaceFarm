@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
 
 public class Building_WindowControler : WindowController
@@ -16,7 +17,7 @@ public class Building_WindowControler : WindowController
 
     private void CreateItemsList()
     {
-        foreach (var item in MainContext.Instance.BuildSystem.BuildingsInfo)
+        foreach (var item in MainContext.Instance.BuildSystem.Buildings.Values)
         {
             CreateBuildingItem(item);
         }
@@ -34,12 +35,13 @@ public class Building_WindowControler : WindowController
     void Start()
     {
         CreateItemsList();
-        SetCurrentBuilding(MainContext.Instance.BuildSystem.BuildingsInfo[0]);
+        List<int> values = new List<int>(MainContext.Instance.BuildSystem.Buildings.Keys);
+        SetCurrentBuilding(MainContext.Instance.BuildSystem.Buildings[values[0]]);
     }
 
     public void SetCurrentBuilding(BuildingInfo buildingInfo)
     {
-        MainContext.Instance.BuildSystem.SetBuilding(buildingInfo.buildingPrefab);
+        MainContext.Instance.BuildSystem.SetBuilding(buildingInfo);
         _currenBuilding = buildingInfo;
         previewImage.sprite = _currenBuilding.Preview;
         nameText.text = _currenBuilding.Name;
@@ -81,12 +83,6 @@ public class Building_WindowControler : WindowController
             FindObjectOfType<Main_WindowController>().ShowWindow(false);
             FindObjectOfType<Constructing_WindowControler>().ShowWindow(true);
             FindObjectOfType<Constructing_WindowControler>().SetApplyButtonActive(false);
-
-            foreach (var item in _currenBuilding.Price)
-            {
-                int costValue = item.Value;
-                MainContext.Instance.User.Storage.GetResourceItem(item.Resource.Type).LoseValue(costValue);
-            }
 
             this.ShowWindow(false);
         }

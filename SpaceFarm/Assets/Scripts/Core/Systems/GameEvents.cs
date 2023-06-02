@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameEvents : MonoBehaviour
 {
     public UnityEvent OnResourcesChanged;
+    public UnityEvent OnBuildingCreated;
     public UnityEvent OnMainLoaded;
     public UnityEvent OnGrow;
     public UnityEvent OnMove;

@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12003857a948c8d409c7c556c4448b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 1
   IsCreated: 0
   Type: 1
   Height: 1
@@ -137,6 +138,7 @@ MonoBehaviour:
   Depth: 0
   Renderer: {fileID: 0}
   CurrentTile: {fileID: 0}
+  Level: 0
   IncomeItems: []
   _crop: {fileID: 11400000, guid: 1b8deea41c4d76f408d0121a9f5eab17, type: 2}
   _noneCrope: {fileID: 11400000, guid: 1b8deea41c4d76f408d0121a9f5eab17, type: 2}

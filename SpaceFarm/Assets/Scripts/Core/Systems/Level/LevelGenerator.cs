@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using Game.Data;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -23,10 +23,15 @@ public class LevelGenerator : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    /*public void GenerateLevel()
+    {
+        StartCoroutine(Generate());
+    }*/
 
     public void GenerateLevel()
     {
         _levelParent = new GameObject("LevelParent").transform;
+        int tileIndex = 0;
         Tiles = new List<Tile>();
 
         for (int h = 0; h < _height; h++)
@@ -47,24 +52,39 @@ public class LevelGenerator : MonoBehaviour
                     pos += new Vector3(0, 0.15f * b, 0);
                 }
 
-                CreateTile(SelectTile(noise).gameObject, pos, (l + h) * 2);
+                Tile tile = CreateTile(SelectTile(noise).gameObject, pos, (l + h) * 2, tileIndex);
+
+                if (MainContext.Instance.User.LevelData.Buildings.ContainsKey(tileIndex))
+                {
+                    BuildingSaveItem saveItem = MainContext.Instance.User.LevelData.Buildings[tileIndex];
+                    MainContext.Instance.BuildSystem.RestoreBuilding
+                        (
+                            tile,
+                            saveItem,
+                            MainContext.Instance.BuildSystem.Buildings[saveItem.ID].buildingPrefab.gameObject
+                        );
+                }
+
+                tileIndex++;
             }
+            //yield return new WaitForFixedUpdate();
         }
     }
 
-    private void CreateTile(GameObject prefab, Vector3 position, int depth)
+    private Tile CreateTile(GameObject prefab, Vector3 position, int depth, int index)
     {
-        GameObject newTile = Instantiate(prefab, _levelParent);
+        Tile newTile = Instantiate(prefab, _levelParent).GetComponent<Tile>();
         newTile.transform.position = position;
 
         if (UnityEngine.Random.Range(0, 10) < 5)
         {
             newTile.transform.localScale = new Vector3(-1, 1, 1);
         }
+        newTile.SetDepth(depth);
+        newTile.Index = index;
+        Tiles.Add(newTile);
 
-        Tile tile = newTile.GetComponent<Tile>();
-        tile.SetDepth(depth);
-        Tiles.Add(tile);
+        return newTile;
     }
 
     private Tile SelectTile(float value)

@@ -5,7 +5,13 @@ namespace Game.Data
 {
     public class LevelData
     {
-        public List<Tile> Tiles;
+        public float NoiseScale;
+        public Dictionary<int, BuildingSaveItem> Buildings;
+
+        public LevelData()
+        {
+            Buildings = new Dictionary<int, BuildingSaveItem>();
+        }
     }
 
     [System.Serializable]
@@ -13,6 +19,19 @@ namespace Game.Data
     {
         public ResourceItem[] resources;
         public ResourceItem[] crops;
+    }
+
+    [System.Serializable]
+    public class BuildingSaveItem
+    {
+        public int ID;
+        public int Progress;
+
+        public BuildingSaveItem(int iD, int progress)
+        {
+            ID = iD;
+            Progress = progress;
+        }
     }
 
     public class Scenes

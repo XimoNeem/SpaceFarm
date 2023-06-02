@@ -18,7 +18,7 @@ public class Shop_WindowControler : WindowController
 
     private void CreateItemsList()
     {
-        foreach (var item in MainContext.Instance.BuildSystem.BuildingsInfo)
+        foreach (var item in MainContext.Instance.BuildSystem.Buildings.Values)
         {
             CreateBuildingItem(item);
         }

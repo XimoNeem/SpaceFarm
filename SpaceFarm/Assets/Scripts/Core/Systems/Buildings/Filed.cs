@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Filed : Building
 {
-    private int _currentStage = 0, _maxStage = 3;
+    private int _maxStage = 3;
     [SerializeField] private Product _crop;
     [SerializeField] private Product _noneCrope;
     private Field_WindowController _fieldController;
@@ -18,7 +18,7 @@ public class Filed : Building
 
         {
             if (_crop.Type == ResourceType.None) _fieldController.SetFileld(this);
-            else if(_currentStage == _maxStage)
+            else if(Progress == _maxStage)
             {
                 MainContext.Instance.User.Storage.GetResourceItem(_crop.Type).AddValue(10);
 
@@ -30,9 +30,9 @@ public class Filed : Building
     /// <summary>
     /// Вызыввется при создании поля
     /// </summary>
-    public override void Create(Tile tile)
+    public override void Initialize(Tile tile)
     {
-        base.Create(tile);
+        base.Initialize(tile);
 
         GameEvents.Instance.OnGrow.AddListener(GetIncome);
         CurrentTile.SetField(true);
@@ -43,7 +43,7 @@ public class Filed : Building
     /// </summary>
     public void SetCrop(Product crop)
     {
-        _currentStage = 0;
+        Progress = 0;
         _crop = crop;
         Renderer.sprite = _crop.Sprites[0];
         _maxStage = _crop.Sprites.Length;
@@ -52,14 +52,14 @@ public class Filed : Building
     {
         if (_crop == null || _crop.Type == ResourceType.None) { return; }
 
-        if (_currentStage != _maxStage)
+        if (Progress != _maxStage)
         {
             Grow();
         }
     }
     private void Grow()
     {
-        Renderer.sprite = _crop.Sprites[_currentStage];
-        _currentStage++;
+        Renderer.sprite = _crop.Sprites[Progress];
+        Progress++;
     }
 }

@@ -83,6 +83,9 @@ namespace Game.Networking
                         );
 
                     StorageInfo resources = JsonUtility.FromJson<StorageInfo>(values["user_resources"]);
+                    LevelData levelData = JsonConvert.DeserializeObject<LevelData>(values["user_level"]);
+                    data.LevelData = levelData;
+
                     successCallback.Invoke(data, new ResourceStorage(resources));
                 }
             }
@@ -91,11 +94,13 @@ namespace Game.Networking
         public static IEnumerator SaveUser(UserData data, Action successCallback, Action<string> errorCallback)
         {
             string resourcesJson = JsonUtility.ToJson(data.Storage.Resources);
+            string levelJson = JsonConvert.SerializeObject(data.LevelData);
 
             WWWForm form = new WWWForm();
             form.AddField("ID", data.ID);
             form.AddField("NAME", data.Name);
             form.AddField("RESOURCES", resourcesJson);
+            form.AddField("LEVEL", levelJson);
 
             using (UnityWebRequest request = UnityWebRequest.Post("http://nevile.pluton-host.ru/gamedata/save_user.php", form))
             {
@@ -114,7 +119,7 @@ namespace Game.Networking
             }
         }
 
-        public static IEnumerator LoadUserData(int id, Action<UserData> successCallback, Action<string> errorCallback)
+        /*public static IEnumerator LoadUserData(int id, Action<UserData> successCallback, Action<string> errorCallback)
         {
             WWWForm form = new WWWForm();
             form.AddField("ID", id);
@@ -134,6 +139,7 @@ namespace Game.Networking
                     var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(request.downloadHandler.text);
 
                     StorageInfo resources = JsonUtility.FromJson<StorageInfo>(values["user_resources"]);
+                    LevelData levelData = JsonConvert.DeserializeObject<LevelData>(values["user_level"]);
 
 
                     UserData data = new UserData(
@@ -143,10 +149,11 @@ namespace Game.Networking
                             values["user_password"]
                         );
                     data.Storage.Resources = resources;
+                    data.LevelData = levelData;
 
                     successCallback.Invoke(data);
                 }
             }
-        }
+        }*/
     }
 }

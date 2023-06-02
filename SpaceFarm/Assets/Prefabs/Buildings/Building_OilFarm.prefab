@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449770582876508628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.681, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.477, z: 0}
+  m_LocalScale: {x: 0.44733748, y: 0.44733748, z: 0.44733748}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 449770583500876710}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: -1004375993, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
+  m_Sprite: {fileID: 679674710, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6816950062956058130}
   - component: {fileID: 1839942669897812103}
   m_Layer: 0
-  m_Name: Building_WaterGenerator
+  m_Name: Building_OilFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14010f41125d6541a93b0a661d69bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 3
   IsCreated: 0
-  Type: 2
+  Type: 3
   Height: 1
   Width: 1
   Depth: 0
@@ -141,29 +141,26 @@ MonoBehaviour:
   Level: 0
   IncomeItems:
   - Value: 1
-    Resource: {fileID: 11400000, guid: fa1b026dbe2dde04cb9726ed87cc9fff, type: 2}
+    Resource: {fileID: 11400000, guid: 02980a9f2a463d14bb1e0b4784a1cd1d, type: 2}
   _progress: 0
   _sprites:
-  - {fileID: 2109246187, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 1598126582, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 1868928194, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 619740637, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -1119096086, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 69774510, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -2035321984, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -144558562, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 641098492, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -81451910, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 894182194, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -890271953, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -1853274308, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -601436580, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 1293081143, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 1438714830, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 392723158, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: 1431696987, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -665482481, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
-  - {fileID: -1004375993, guid: 8f42607c7a3be1e4c9646d99081cdeb8, type: 3}
+  - {fileID: 679674710, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -1576725867, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: 551642605, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -365473102, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -1545399322, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -112290840, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -1906836307, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: 178089430, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -809180780, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -1879950354, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -2053472932, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: 303738731, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: 968167183, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: 1256091706, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -878930823, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -1027643929, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
+  - {fileID: -469596239, guid: 6e600b6bfc8f531489a56d8ec78bc5d0, type: 3}
 --- !u!60 &1839942669897812103
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -189,9 +186,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.6149125, y: 0.3281483}
-      - {x: -0.3311834, y: 0.87360114}
-      - {x: -1.236866, y: 0.3232363}
-      - {x: -1.2338185, y: -0.3124549}
-      - {x: -0.3278128, y: -0.8313005}
-      - {x: 0.61420465, y: -0.28433147}
+    - - {x: 0.64879215, y: 0.091870785}
+      - {x: -0.26946977, y: 0.63446087}
+      - {x: -1.159724, y: 0.11495274}
+      - {x: -1.1721048, y: -0.33559754}
+      - {x: -0.25345355, y: -0.86510015}
+      - {x: 0.6557985, y: -0.34318227}

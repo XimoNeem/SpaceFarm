@@ -5,6 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Tile : MonoBehaviour
 {
+    public int Index;
     private bool _isOccupied = false;
     private bool _isField = false;
 
@@ -19,18 +20,20 @@ public class Tile : MonoBehaviour
 
     private const float RAY_DISTANCE = 0.86f;
 
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer Renderer;
 
     private Vector3 _defaultSize;
 
-    public void Start()
+    public void Awake()
     {
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _defaultSize = this.transform.localScale;
-
-        Create();
-
+        Renderer = GetComponentInChildren<SpriteRenderer>();
+        Initialize();
         SetBehaviour(Behaviour.GetBehaviour());
+    }
+
+    private void Start()
+    {
+        _defaultSize = this.transform.localScale;
     }
 
     public void SetBehaviour(TileBehaviour behaviour)
@@ -64,11 +67,14 @@ public class Tile : MonoBehaviour
     public void SetDepth(int value)
     {
         depth = value;
+        if (Renderer == null) { return; }
+
+        Renderer.sortingOrder = depth;
     }
 
-    virtual public void Create()
+    virtual public void Initialize()
     {
-        _spriteRenderer.sortingOrder = depth;
+
     }
 
     public void ChangeSize(float size)
